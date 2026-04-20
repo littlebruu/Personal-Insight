@@ -1,5 +1,5 @@
 
-# Personal Insight
+![Banner do projeto](https://github.com/littlebruu/Personal-Insight/blob/main/assets/Banner.png)
 
 Ferramenta analítica para o monitoramento de rotina, nutrição e indicadores de desempenho pessoal. Otimizado para alta performance e interface minimalista.
 ...
