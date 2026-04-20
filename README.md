@@ -1,23 +1,31 @@
+<p align=center>
+<img src="https://github.com/littlebruu/Personal-Insight/blob/main/assets/logo.png" alt="logo"  width="400"/><br>
+</p>
 
-![Banner do projeto](https://github.com/littlebruu/Personal-Insight/blob/main/assets/Banner.png)
+---
+<p align=center>
+<img src="https://github.com/littlebruu/Personal-Insight/blob/main/assets/Florzinha-calma-edit.png" alt="flozinha calma"  width="80"/><br>
+Este é um projeto simples que criei para me ajudar a organizar minha rotina pessoal. O objetivo principal é ter um lugar prático para anotar minha alimentação e como estou me sentindo ao longo do dia.
+</p>
 
-Ferramenta analítica para o monitoramento de rotina, nutrição e indicadores de desempenho pessoal. Otimizado para alta performance e interface minimalista.
-...
-Ferramenta analítica para o monitoramento de rotina, nutrição e indicadores de desempenho pessoal. Otimizado para alta performance e interface minimalista.
+---
 
-## Funcionalidades principais
+### Para que serve:
 
-- **Data Entry:** Interface limpa para registro de logs diários.
-- **Protocol Tracking:** Campo para validação de protocolos de medicação/tratamento.
-- **Status Analysis:** Seleção de estados de produtividade e bem-estar.
-- **Data Export:** Exportação em formato estruturado por tabulação para integração com softwares de BI (Excel/Google Sheets).
+<strong>Acompanhamento Alimentar:</strong> Registrar minhas refeições de forma rápida. <br>
+<strong>Controle de Rotina:</strong> Marcar os dias em que segui meu protocolo de medicação.<br>
+<strong>Auto-observação:</strong> Anotar meu nível de energia e foco para entender melhor meu ritmo.
+</p>
 
-## Implementação
 
-O sistema utiliza armazenamento local do navegador para persistência temporária de dados, garantindo que as informações não trafeguem por servidores externos, reforçando a privacidade do usuário.
 
-## Operação
+### Como funciona:
+Eu uso a página para fazer as anotações diárias e, no final do dia, utilizo a função de exportar para salvar os dados em uma planilha externa. Isso me ajuda a manter tudo organizado e acessível de qualquer lugar.
 
-1. Insira os dados conforme a atividade realizada.
-2. Utilize a função **Exportar** para transferir os dados consolidados para sua planilha de controle principal.
-3. Limpe o banco de dados local periodicamente para manter a aplicação ágil.
+---
+*Nota: Este sistema utiliza armazenamento local no navegador para manter a privacidade dos dados.*
+
+
+<p align=center>
+<img src="https://github.com/littlebruu/Personal-Insight/blob/main/assets/Florzinha-feliz-edit.png" alt="flozinha feliz"  width="80"/><br>
+</p>
