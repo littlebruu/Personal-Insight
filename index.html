@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log de Rotina</title>
+    <style>
+        :root { --p: #6c5ce7; --bg: #f4f7f6; --t: #2d3436; --a: #00b894; }
+        body { font-family: sans-serif; background: var(--bg); color: var(--t); padding: 15px; display: flex; flex-direction: column; align-items: center; }
+        .wrapper { width: 100%; max-width: 450px; }
+        .box { background: white; padding: 20px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        label { display: block; font-size: 0.75rem; font-weight: bold; margin: 12px 0 5px; color: var(--p); text-transform: uppercase; }
+        input, select, button { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #dfe6e9; box-sizing: border-box; font-size: 1rem; }
+        .opt-group { background: #f1f2f6; padding: 10px; border-radius: 10px; display: flex; justify-content: space-around; }
+        .opt-group label { margin: 0; color: var(--t); cursor: pointer; }
+        button { background: var(--p); color: white; border: none; font-weight: bold; cursor: pointer; margin-top: 15px; }
+        .copy-trigger { background: var(--a); margin-top: 20px; }
+        .clear-trigger { background: none; color: #d63031; border: 1px solid #d63031; margin-top: 10px; font-size: 0.8rem; }
+        .row { background: white; padding: 12px; border-radius: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; box-shadow: 0 2px 5px rgba(0,0,0,0.03); border-left: 6px solid var(--p); }
+        .alt { border-left-color: #fab1a0; }
+        .details b { display: block; font-size: 0.9rem; }
+        .details span { font-size: 0.7rem; color: #b2bec3; }
+        .tag { font-size: 0.7rem; padding: 2px 6px; background: #eee; border-radius: 4px; margin-top: 4px; display: inline-block; }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="box">
+        <label>Registro</label>
+        <input type="text" id="entry" placeholder="Descreva a atividade/alimento">
+
+        <label>Uso de medicação</label>
+        <div class="opt-group">
+            <label><input type="radio" name="st" value="Sim" checked> Sim</label>
+            <label><input type="radio" name="st" value="Não"> Não</label>
+        </div>
+
+        <label>Status/Humor</label>
+        <select id="md">
+            <option value="🙂 Focada">Focada</option>
+            <option value="😐 Neutra">Neutra</option>
+            <option value="😫 Cansada">Cansada</option>
+            <option value="😢 Triste">Triste</option>
+            <option value="🤩 Energia">Energia</option>
+        </select>
+
+        <button onclick="save()">Salvar</button>
+    </div>
+
+    <div id="display"></div>
+
+    <button class="copy-trigger" onclick="exportData()">Exportar para Planilha</button>
+    <button class="clear-trigger" onclick="reset()">Limpar registros locais</button>
+</div>
+
+<script>
+    let db = JSON.parse(localStorage.getItem('_app_logs')) || [];
+
+    function update() {
+        const container = document.getElementById('display');
+        container.innerHTML = '';
+        db.slice().reverse().forEach(item => {
+            const style = item.st === 'Não' ? 'alt' : '';
+            container.innerHTML += `
+                <div class="row ${style}">
+                    <div class="details">
+                        <b>${item.entry}</b>
+                        <span>${item.dt} - ${item.hr}</span>
+                        <div class="tag">Med: ${item.st}</div>
+                    </div>
+                    <div>${item.md.split(' ')[0]}</div>
+                </div>`;
+        });
+        localStorage.setItem('_app_logs', JSON.stringify(db));
+    }
+
+    function save() {
+        const val = document.getElementById('entry').value;
+        if (!val) return;
+        db.push({
+            dt: new Date().toLocaleDateString(),
+            hr: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}),
+            entry: val,
+            st: document.querySelector('input[name="st"]:checked').value,
+            md: document.getElementById('md').value
+        });
+        document.getElementById('entry').value = '';
+        update();
+    }
+
+    function exportData() {
+        if (db.length === 0) return;
+        let out = "DATA\tHORA\tENTRADA\tMED\tSTATUS\n";
+        db.forEach(i => {
+            out += `${i.dt}\t${i.hr}\t${i.entry}\t${i.st}\t${i.md}\n`;
+        });
+        navigator.clipboard.writeText(out).then(() => alert('Dados formatados e copiados.'));
+    }
+
+    function reset() {
+        if(confirm('Limpar lista local?')) {
+            db = [];
+            update();
+        }
+    }
+
+    update();
+</script>
+
+</body>
+</html>
